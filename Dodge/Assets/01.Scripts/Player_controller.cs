@@ -6,11 +6,11 @@ public class Player_controller : MonoBehaviour
 {
     public Rigidbody player_rigidbody;
     public float speed = 8f;
-
+    
     // Start is called before the first frame update
     void Start()
     {
-
+        Debug.Log("æ»≥Á«œººø‰");
     }
 
     // Update is called once per frame
