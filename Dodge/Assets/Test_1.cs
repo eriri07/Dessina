@@ -6,10 +6,10 @@ public class Test_1 : MonoBehaviour
 {
     //변수를 선언하는 방법은 타입과 변수명을 선언하고 세미콜론을 붙여준다.
 
-    int test_int;       //정수를 할당할 때 int 타입으로 변수를 선언한다.
-    float test_float;   //정수도 가능하지만 소수의 값을 저장할 때 float타입의 변수를 선언한다.
-    string test_string; //문자열을 할당해줄 때 string 타입의 변수를 선언해준다.         
-    bool test_bool;     //true와 false의 값 즉 참과 거짓의 값을 할당 할 때 bool타입의 변수를 선언해준다.
+    public int test_int;       //정수를 할당할 때 int 타입으로 변수를 선언한다.
+    public float test_float;   //정수도 가능하지만 소수의 값을 저장할 때 float타입의 변수를 선언한다.
+    public string test_string; //문자열을 할당해줄 때 string 타입의 변수를 선언해준다.         
+     public bool test_bool;     //true와 false의 값 즉 참과 거짓의 값을 할당 할 때 bool타입의 변수를 선언해준다.
 
     /*public int test_int2;
     public int test_int3;
@@ -19,17 +19,28 @@ public class Test_1 : MonoBehaviour
     public int test_bool1;
     public int test_bool2;
     public bool test_while;
+
+    public int[] test_array_int = new int[2];        //int타입의 배열 변수 선언 방법
     private void Start()
     {
         // int 1 = 0은 반복을 시작하는 숫자, i < 10은 i 가 10보다 작을 때까지 반복, i++는 i를 1씩 증가
-        for (int i = 0; i < 10; i++)
+        /*for (int i = 0; i < 10; i++)
         {
             Debug.Log(i);
         }
-
+*/
         //test_method(test_int2, test_int3);
         //test_int4 = test_method2(test_int2, test_int3);
-        if (test_bool1 < test_bool2)
+
+
+        //test_array_int[0] = 1;                 //배열 0번째 인덱스에 1의 값을 할당
+        //test_int = test_array_int[0];           //배열 0번째 인덱스에 있는 1의 값을 test_int에 할당
+        
+
+    }
+    private void Update()
+    {
+        /* if (test_bool1 < test_bool2)
         {
             Debug.Log("참이다.");
         }
@@ -40,17 +51,20 @@ public class Test_1 : MonoBehaviour
         else
         {
             Debug.Log("모두 거짓이다.");
+        }*/
+        /*if (test_bool)
+        {
+            Debug.Log("참");
         }
-        
-
-    }
-    private void Update()
-    {
+        else
+        {
+            Debug.Log("거짓");
+        }*/
         //while문은 괄호 안에 있는 값이 만족을 할 때까지만 반복을 한다. 
-        while (test_bool1 < 10)
+        /*while (test_bool1 < 10)
         {
             Debug.Log(test_bool1++);
-        }
+        }*/
 
         //비교 연산자 종류
         //a > b 는 a는 b보다 크다
