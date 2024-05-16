@@ -9,20 +9,24 @@ public class GameManager : MonoBehaviour
     public GameObject gameover_text;
     public Text time_text;
     public Text record_text;
+    public GameObject[] temp;
+    public Text best_score;
 
-    private float survive_time;
+    private float score;
     bool is_gameover;
     // Start is called before the first frame update
     void Start()
     {
-        survive_time = 0;
+        //temp[0].SetActive(true);
+        
+        score = 0;
         is_gameover = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!is_gameover)
+        /*if (!is_gameover)
         {
             survive_time += Time.deltaTime;
             time_text.text = "Time" + (int)survive_time;
@@ -33,22 +37,22 @@ public class GameManager : MonoBehaviour
             {
                 SceneManager.LoadScene("Dodge_Scene");
             }
-        }
+        }*/
     }
 
     public void EndGame()
     {
-        is_gameover = true;
+        /*is_gameover = true;
         gameover_text.SetActive(true);
 
-        float best_time = PlayerPrefs.GetFloat("Best_time");
+        float best_time = PlayerPrefs.GetFloat("Best_score");
 
-        if (survive_time > best_time)
+        if (score > best_score)
         {
             best_time = survive_time;
             PlayerPrefs.SetFloat("Best_time", best_time);
         }
 
-        record_text.text = "Best Time : " + (int)best_time;
+        record_text.text = "Best Time : " + (int)best_time;*/
     }
 }
