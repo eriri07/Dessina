@@ -15,6 +15,6 @@ public class Rotator : MonoBehaviour
     void Update()
     {
         transform.Rotate(0, rotation_speed * Time.deltaTime, 0);
-        //rotate (프레임마다 지정한 값만큼 회전한다.)
+        //Rotate(프레임마다 지정한 값만큼 회전한다.)
     }
 }

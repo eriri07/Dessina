@@ -6,9 +6,9 @@ public class Test_Vector : MonoBehaviour
 {
     public Vector3 a = new Vector3(1, 2, 3);
     public Vector3 b = new Vector3(2, 3, 4);
-    public Vector2 c = new Vector2(4, 5); 
-
-    private void Start()
+    public Vector2 c = new Vector2(4, 5);
+    // Start is called before the first frame update
+    void Start()
     {
         a.x = 10;
         a.y = 20;
@@ -19,7 +19,7 @@ public class Test_Vector : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.S))
-        {
+        {      
             a = a * 10;
             Debug.Log("기존에 있던 a(1, 2, 3)을 스칼라 곱 10을 해서 나온 값 = " + a);
         }
@@ -34,15 +34,17 @@ public class Test_Vector : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.F))
         {
-            Debug.Log("벡터의 크기 = " + c.magnitude);
+            Debug.Log("벡터의 크기 =" + c.magnitude);
         }
         else if (Input.GetKeyDown(KeyCode.G))
-        {
-            Debug.Log("벡터의 내적 = " + Vector3.Dot(a.normalized, b.normalized));
+        {       //값은 -1 ~ 1
+            Debug.Log("벡터의  내적 = " + Vector3.Dot(a.normalized, b.normalized));
         }
         else if (Input.GetKeyDown(KeyCode.H))
         {
-            Debug.Log("벡터의 외적 = " + Vector3.Cross(a, b));
+            Debug.Log("벡터의 외적 =  " + Vector3.Cross(a, b));
         }
+        // 회전을 나타낼 땐 Quaternion을 사용한다 new Quaternion(0, 0, 0, 1); 4원수로 이뤄진 걸 보여주기 위해 써놓은 것
+        // transform.rotation = Quaternion.Euler(new Vector3(0 ,0, 0)); <= 오브젝트에 회전을 주는 방식 중 하나
     }
 }
