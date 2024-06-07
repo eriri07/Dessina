@@ -14,26 +14,77 @@ public class PlayerController_uni_run : MonoBehaviour {
    private AudioSource playerAudio; // 사용할 오디오 소스 컴포넌트
 
    private void Start() {
-       // 초기화
+        //게임 오브젝트로부터 사용 할 컴포넌트들을 가져와 변수에 할당
+        playerRigidbody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        playerAudio = GetComponent<AudioSource>();
    }
 
-   private void Update() {
-       // 사용자 입력을 감지하고 점프하는 처리
+   private void Update()
+   {
+        if (isDead)
+        {
+            return;
+        }
+        if (Input.GetMouseButtonDown(0) && jumpCount < 2)
+        {
+            jumpCount++;
+            //점프 직전에 속도를 순간적으로 제로로 변경
+            playerRigidbody.velocity = Vector3.zero;
+            playerRigidbody.AddForce(new Vector2(0, jumpForce));
+            playerAudio.Play();
+        }        
+        else if (Input.GetMouseButtonUp(0) && playerRigidbody.velocity.y > 0)
+        {
+            //마우스 왼쪽 버튼에서 손을 떼는 순간 && 속도의 y값이 양수라면
+
+            playerRigidbody.velocity = playerRigidbody.velocity * 0.5f;
+        }
+
+        //애니메이터의 Grounded 파라미터를 isGrounded 값으로 갱신
+        animator.SetBool("Grounded", isGrounded);
    }
 
-   private void Die() {
-       // 사망 처리
+   private void Die()
+    {
+        animator.SetTrigger("Die");
+
+        playerAudio.clip = deathClip;
+        //사망 효과음 재생
+        playerAudio.Play();
+
+        //속도를 제로(0, 0)로 변경
+        playerRigidbody.velocity = Vector2.zero;
+        //사망 상태를 true로 변경
+        isDead = true;
+
+        //게임 매니저의 게임 오버 처리 실행
+        GameManager_uni_run.instance.OnPlayerDead();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) 
+    {
+        if (other.tag == "Dead" && !isDead)
+        {
+            //충돌 한 상대방의 태그가 Dead이며 아직 사망하지 않았다면 Die() 실행
+            Die();
+        }
+    }
+
+   private void OnCollisionEnter2D(Collision2D collision) 
+   {
+        //어떤 콜라이더와 닿았으며, 충돌 표면이 위쪽을 보고 있으면
+        if (collision.contacts[0].normal.y > 0.7f)
+        {
+            //isGrounded를 true로 변경하고, 누적 점프 횟수를 0으로 리셋
+            isGrounded = true;
+            jumpCount = 0;
+        }
    }
 
-   private void OnTriggerEnter2D(Collider2D other) {
-       // 트리거 콜라이더를 가진 장애물과의 충돌을 감지
-   }
-
-   private void OnCollisionEnter2D(Collision2D collision) {
-       // 바닥에 닿았음을 감지하는 처리
-   }
-
-   private void OnCollisionExit2D(Collision2D collision) {
-       // 바닥에서 벗어났음을 감지하는 처리
+   private void OnCollisionExit2D(Collision2D collision) 
+   {
+        //어떤 콜라이더에서 떼어진 경우 isGrounded를 false로 변경
+        isGrounded = false;
    }
 }
